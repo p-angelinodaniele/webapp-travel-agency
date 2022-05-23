@@ -26,40 +26,59 @@
 </div>
 
 
-@section Script{
+@section Scripts {
     <script type="text/javascript">
 
         loadViaggi();
-            function loadViaggi{
+            function loadViaggi(){
+                document.getElementById('pacchetti-card').innerHTML = '';
+
+
                 axios.get('/api/User/Get').then((result) => {
                     console.log("Ho ricevuto i pacchetti viaggi");
 
-                    result.data.forEach(pacchetti => {
-                        document.getElementById('pacchetti-card').innerHTML +=
-                        `
-                            <div class="col-12 col-sm-6 col col-lg-3 rounded">
-                                <div class="card post gy-0 m-1">
-                                    <img class="card-img-top" src="${pacchetti.Image}" alt="" width="250" height="200">
-                                    <div class="card-body p-0" style= "height: 15rem;">
-                                        <h5 class="card-title bg-warning text-white p-3">${pacchetti.Titolo}</h5>
-                                        <p class="card-text text-muted">${pacchetti.Description}</p>
+                    if(result.data.lenght == 0){
+                        document.getElementById('pacchetti-wait').classList.add('d-none')
+                        document.getElementById('no-pacchetti-div').classList.remove('d-none')
+
+                    }else{
+                        document.getElementById('no-pacchetti-div').classList.add('d-none')
+                        document.getElementById('pacchetti-wait').classList.add('d-none')
+                        document.getElementById('pacchetti-card').classList.remove('d-none')
                     
-                                    </div>
-                                    <div class="card-footer justify-content-center">
-                                        <p class="text-warning"><strong>${pacchetti.Giorni} - ${pacchetti.Destinazioni}</strong> </p>
-                                        <h5 class="text-muted"><strong>${pacchetti.Prezzo}/&euro;</strong>/person</h5> 
+
+                        result.data.forEach(pacchetti => {
+                            document.getElementById('pacchetti-card').innerHTML +=
+                            `
+                                <div class="col-12 col-sm-6 col col-lg-4 rounded">
+                                    <div class="card post gy-0 m-1">
+                                        <img class="card-img-top" src="${pacchetti.image}" alt="" width="250" height="200">
+                                        <div class="card-body p-0" style= "height: 15rem;">
+                                            <h5 class="card-title bg-warning text-white p-3">${pacchetti.titolo}</h5>
+                                            <p class="card-text text-muted">${pacchetti.description}</p>
+                    
+                                        </div>
+                                        <div class="card-footer justify-content-center">
+                                            <p class="text-warning"><strong>${pacchetti.giorni} - ${pacchetti.destinazioni}</strong> </p>
+                                            <h5 class="text-muted"><strong>${pacchetti.prezzo} &euro;</strong>/person</h5> 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        `
-                    })
-                })
+                            `
+                        });
+                    }
+                }
+
+                ).catch((error) => {
+                    console.log("C'è stato un errore: " + error)
+                });
             }
            
-
+       
 
 
     </script>
+
 }
 
 

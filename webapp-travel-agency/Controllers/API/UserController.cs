@@ -17,6 +17,7 @@ namespace webapp_travel_agency.Controllers.API
             {
                 listaPacchetti = db.PacchettoViaggio.ToList<PacchettoViaggio>();
             }
+
             return Ok(listaPacchetti);
         }
     }
