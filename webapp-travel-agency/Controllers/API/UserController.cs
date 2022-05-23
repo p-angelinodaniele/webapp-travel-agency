@@ -10,12 +10,19 @@ namespace webapp_travel_agency.Controllers.API
     public class UserController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(string? search)
         {
             List<PacchettoViaggio> listaPacchetti = new List<PacchettoViaggio>();
             using (AgenziaContext db = new AgenziaContext())
             {
-                listaPacchetti = db.PacchettoViaggio.ToList<PacchettoViaggio>();
+                if(search != null && search != "")
+                {
+                    listaPacchetti = db.PacchettoViaggio.Where(listaPacchetti => listaPacchetti.Titolo.Contains(search) || listaPacchetti.Description.Contains(search)).ToList<PacchettoViaggio>();
+                }
+                else
+                {
+                    listaPacchetti = db.PacchettoViaggio.ToList<PacchettoViaggio>();
+                }
             }
 
             return Ok(listaPacchetti);

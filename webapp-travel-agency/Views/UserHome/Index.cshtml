@@ -3,9 +3,9 @@
         <div class="col-12 text-center">
             <h2>Our amazing tours</h2>
         </div>
-        <div class="col-6 text-center">
-            <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium ducimus aperiam veritatis culpa doloremque quae eum voluptatum optio incidunt, ad natus? Dolore esse sed optio nostrum quidem itaque consectetur quas!</p>
-        </div>
+        <div>
+            <input id="search_input" type="text" placeholder="Cerca per titolo...">
+        </div>       
     </div>
     <div id="pacchetti-wait" class="row text-center">
         <div class="col-12 text-white">
@@ -29,12 +29,26 @@
 @section Scripts {
     <script type="text/javascript">
 
-        loadViaggi();
-            function loadViaggi(){
+        document.getElementById("search_input").addEventListener('keyup', searchItems);
+
+        searchItems();
+
+
+
+            function searchItems(){
+                var inputText = document.getElementById('search_input').value;
+                loadViaggi(inputText);
+            }
+
+            function loadViaggi(searchParameter){
                 document.getElementById('pacchetti-card').innerHTML = '';
 
 
-                axios.get('/api/User/Get').then((result) => {
+                axios.get('/api/User/Get', {
+                    params : {
+                        search : searchParameter
+                    }
+                }).then((result) => {
                     console.log("Ho ricevuto i pacchetti viaggi");
 
                     if(result.data.lenght == 0){
