@@ -3,7 +3,7 @@
 
 <!--HEADER-->
     <div class="container ml-5">
-        <div class="row justify-content-center mt-4">
+        <div class="row justify-content-center mt-4 text-white">
             <div class="col-12 text-center">
                 <h2>Our amazing tours</h2>
             </div>
@@ -11,3 +11,39 @@
                 <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium ducimus aperiam veritatis culpa doloremque quae eum voluptatum optio incidunt, ad natus? Dolore esse sed optio nostrum quidem itaque consectetur quas!</p>
             </div>
         </div>
+
+        <!--MAIN-->
+        <div class="row text-center mb-5">
+
+        @foreach(PacchettoViaggio cardViaggi in Model)
+        {
+            
+        
+            
+            <!--PRIMA CARTA-->
+            <div class="col-12 col-md card p-0 m-2 shadow mb-5 bg-white rounded">
+                <img src="@cardViaggi.Image" alt="">
+                <div class="card-body p-0">
+                    <h5 class="card-title bg-warning text-white p-3">@cardViaggi.Titolo</h5>
+                    <p class="card-text text-muted">@cardViaggi.Description</p>
+                    
+                </div>
+                <hr>
+                <p class="text-warning"><strong>@cardViaggi.Giorni - @cardViaggi.Destinazioni</strong> </p>
+                <h5 class="text-muted"><strong>@cardViaggi.Prezzo/&euro;</strong>/person</h5> 
+                <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Home", new { Id = cardViaggi.Id })">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </a>
+            </div>
+
+
+        }
+
+
+
+    </div>
+
+
+
+
+
