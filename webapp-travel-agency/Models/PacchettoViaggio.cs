@@ -16,6 +16,9 @@ namespace webapp_travel_agency.Models
         [StringLength(100, ErrorMessage = "La descrizione non può avere più di 100 caratteri")]
         [Column(TypeName = "text")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "l'URL dell'immagine è obbligatorio")]
+        [Url(ErrorMessage = "Mi dispiace l'URL inserito non è valido")]
         public string Image { get; set; }
 
         [Required(ErrorMessage = "Il campo titolo è obbligatorio")]

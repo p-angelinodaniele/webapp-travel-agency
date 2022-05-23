@@ -13,27 +13,48 @@
         </div>
 
         <!--MAIN-->
-        <div class="row text-center mb-5">
+        
 
+
+            <a class="btn btn-warning"
+            href="@Url.Action("Create", "Home")">
+            Aggiungi Pacchetto
+            </a>
+
+
+
+        <div class="card-group">
         @foreach(PacchettoViaggio cardViaggi in Model)
         {
             
         
             
-            <!--PRIMA CARTA-->
-            <div class="col-12 col-md card p-0 m-2 shadow mb-5 bg-white rounded">
-                <img src="@cardViaggi.Image" alt="">
-                <div class="card-body p-0">
-                    <h5 class="card-title bg-warning text-white p-3">@cardViaggi.Titolo</h5>
-                    <p class="card-text text-muted">@cardViaggi.Description</p>
+            
+            <div class="col-12 col-sm-6 col col-lg-3 rounded">
+                <div class="card post gy-0 m-1">
+                    <img class="card-img-top" src="@cardViaggi.Image" alt="" width="250" height="200">
+                    <div class="card-body p-0" style= "height: 15rem;">
+                        <h5 class="card-title bg-warning text-white p-3">@cardViaggi.Titolo</h5>
+                        <p class="card-text text-muted">@cardViaggi.Description</p>
                     
+                    </div>
+                    <div class="card-footer justify-content-center">
+                        <p class="text-warning"><strong>@cardViaggi.Giorni - @cardViaggi.Destinazioni</strong> </p>
+                        <h5 class="text-muted"><strong>@cardViaggi.Prezzo/&euro;</strong>/person</h5> 
+                        <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Home", new { Id = cardViaggi.Id })">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </a>
+                        <a class="btn btn-warning btn-sm" href="@Url.Action("Update", "Home", new { Id = cardViaggi.Id })">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
+                        </a>
+                        <form action="@Url.Action("Delete", "Home", new {id= cardViaggi.Id})" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                    </button>
+                        </form>
+                    </div>
                 </div>
-                <hr>
-                <p class="text-warning"><strong>@cardViaggi.Giorni - @cardViaggi.Destinazioni</strong> </p>
-                <h5 class="text-muted"><strong>@cardViaggi.Prezzo/&euro;</strong>/person</h5> 
-                <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Home", new { Id = cardViaggi.Id })">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                </a>
             </div>
 
 
