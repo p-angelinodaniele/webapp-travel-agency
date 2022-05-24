@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapp_travel_agency.DataBase;
 
@@ -10,9 +11,10 @@ using webapp_travel_agency.DataBase;
 namespace webapp_travel_agency.Migrations
 {
     [DbContext(typeof(AgenziaContext))]
-    partial class AgenziaContextModelSnapshot : ModelSnapshot
+    [Migration("20220524153655_MessaggioCreate")]
+    partial class MessaggioCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

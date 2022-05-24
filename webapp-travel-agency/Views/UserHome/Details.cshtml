@@ -13,6 +13,64 @@
         <div id="pacchetti-card" class="row justify-content-center">
             <!-- qui verranno mostrati gli elementi -->
         </div>
+
+        <div class="container text-white">
+            <h1 class="text-center">Puoi richiedere qui le tue informazioni</h1>
+
+            <!--NAME-->
+            <form id="offerForm" onsubmit="MandareDati(event)">
+                <div class="row p-2">
+                    
+                   
+                    
+                    <div class="col-12 col-sm-6">
+                        <label for="firstName">Nome</label>
+                        <input type="text" class="form-control" id="nome" placeholder="First name">
+                    </div>
+
+
+                    <div class="col-12 col-sm-6">
+                        <label for="lastName">Cognome</label>
+                        <input type="text" class="form-control" id="cognome" placeholder="Last name">
+                    </div>
+
+                </div>
+
+                <!--EMAIL-->
+                <div class="row p-2">
+
+                    <div class="col-12">
+                        <label for="emailAddress">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email" id="email">
+                    </div>
+                </div>
+                <!--TEXT-AREA-->
+                <div class="row p-2">
+
+                    <div class="col-12">
+                        <label for="textArea">Message</label>
+                        <textarea class="form-control" id="messaggio" rows="4"></textarea>
+                    </div>
+
+                </div>
+
+                <!--BUTTON-->
+                <div class="row p-2 text-center">
+
+                    <div class="col">
+                        <button type="submit" class="btn btn-warning text-center" id="bottone">Send</button>
+                    </div>
+
+                </div>
+
+                
+            </form>
+
+        
+
+
+
+
     </div>
 </div>
 
@@ -75,9 +133,29 @@
 
                     });
 
+        }
+
+        function MandareDati(e){
+            e.preventDefault();
+            let nome = document.getElementById('nome').value;
+            let cognome = document.getElementById('cognome').value;
+            let email = document.getElementById('email').value;
+            let messaggio = document.getElementById('messaggio').value;
+
+            var richiesta ={
+                nome : nome,
+                cognome : cognome,
+                email : email,
+                messaggio : messaggio,
+                PacchettoViaggioId : idPacchetto
             }
 
-    
+            axios.post('/api/User/MoreInfo', richiesta
+            ).then((result) =>{
+                console.log(result.data)
+            })
+
+        }
     
     
     

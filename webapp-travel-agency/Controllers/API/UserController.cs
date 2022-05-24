@@ -57,5 +57,24 @@ namespace webapp_travel_agency.Controllers.API
         }
 
 
+        [HttpPost]
+        public IActionResult MoreInfo([FromBody] Messaggio messaggio)
+        {
+            if (!ModelState.IsValid)
+            {
+                return UnprocessableEntity(ModelState);
+            }
+            using (AgenziaContext db = new AgenziaContext())
+            {
+                messaggio = new Messaggio(messaggio.nome, messaggio.cognome, messaggio.email, messaggio.messaggio, messaggio.PacchettoViaggioId);
+                
+                db.Messaggio.Add(messaggio);
+                db.SaveChanges();
+            }
+            return Ok(messaggio);
+
+        }
+
+
     }
 }

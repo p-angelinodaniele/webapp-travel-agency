@@ -34,6 +34,14 @@ namespace webapp_travel_agency.Models
             
         }
 
-
+        public Messaggio(string nome, string cognome, string messaggio, string email, int pacchettoViaggioId)
+        {
+            this.nome = nome;
+            this.cognome = cognome;
+            this.messaggio = messaggio;
+            this.email = email;
+            PacchettoViaggioId = pacchettoViaggioId;
+            
+        }
     }
 }
