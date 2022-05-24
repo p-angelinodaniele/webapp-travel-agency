@@ -30,6 +30,8 @@ namespace webapp_travel_agency.Models
         [Required(ErrorMessage = "Il campo titolo è obbligatorio")]
         public string Giorni { get; set; }
 
+        public List<Messaggio> Messaggio { get; set; }
+
 
 
 
