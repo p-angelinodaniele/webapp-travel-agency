@@ -1,0 +1,90 @@
+﻿<div class="container">
+    <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center text-white">
+                    <h1 class="mt-3 mb-3">Lista posts</h1>
+                
+                </div>
+            </div>
+        
+    
+        
+        
+        <div id="pacchetti-card" class="row justify-content-center">
+            <!-- qui verranno mostrati gli elementi -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts{
+
+
+    <script type="text/javascript">
+                var url = window.location.pathname;
+                var idPacchetto = url.substring(url.lastIndexOf('/') + 1);
+                console.log(idPacchetto);
+
+        details(idPacchetto);
+        
+        
+        function details(searchid){
+            document.getElementById('pacchetti-card').innerHTML= '';
+
+            axios.get('/api/User/Details', {
+                params : {
+                    id : searchid
+                }
+             }).then((result) => {
+                console.log(result.data);
+                console.log(result.data.image);
+                var pacchetto = result.data;
+                console.log(pacchetto);
+
+                
+                            document.getElementById('pacchetti-card').innerHTML =
+
+                            `
+                            <div class="col-12 col-sm-6 col col-lg-4 rounded ">
+                                    
+                                    <div class="card post gy-0 m-1">
+                                        <img class="card-img-top" src="${pacchetto.image}" alt="" width="250" height="200">
+                                        <div class="card-body p-0" style= "height: 15rem;">
+                                            <h5 class="card-title bg-warning text-white p-3">${pacchetto.titolo}</h5>
+                                            <p class="card-text text-muted">${pacchetto.description}</p>
+                    
+                                        </div>
+                                        <div class="card-footer justify-content-center">
+                                            <p class="text-warning"><strong>${pacchetto.giorni} - ${pacchetto.destinazioni}</strong> </p>
+                                            <h5 class="text-muted"><strong>${pacchetto.prezzo} &euro;</strong>/person</h5> 
+                                                
+                                        </div>
+                                    </div>
+                                    
+                            </div>
+                            `
+
+
+
+                        
+
+
+                    });
+
+            }
+
+    
+    
+    
+    
+    
+    </script>
+
+
+
+
+}
